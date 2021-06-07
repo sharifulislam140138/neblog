@@ -22,6 +22,27 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/',function(){
-    return view('layouts.website');
+    return view('website.home');
+
+});
+
+Route::get('/about',function(){
+    return view('website.about');
+
+});
+
+Route::get('/contact',function(){
+    return view('website.contact');
+
+});
+
+Route::get('/category',function(){
+    return view('website.category');
+
+});
+
+
+Route::get('/post',function(){
+    return view('website.post');
 
 });
