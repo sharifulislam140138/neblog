@@ -46,3 +46,10 @@ Route::get('/post',function(){
     return view('website.post');
 
 });
+
+//admin panel
+
+Route::get('/test',function(){
+
+	return view('admin.dashboard.index');
+});
