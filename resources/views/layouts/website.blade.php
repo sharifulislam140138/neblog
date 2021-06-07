@@ -102,7 +102,7 @@
             <a href="single.html" class="h-entry mb-30 v-height gradient" style="background-image: url('{{URL::to('website/')}}/images/img_3.jpg');">
               
               <div class="text">
-                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
+                <h2>my name is sharif </h2>
                 <span class="date">July 19, 2019</span>
               </div>
             </a>
