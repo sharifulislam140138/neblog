@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/',function(){
     return view('website.home');
 
-});
+})->name('website');
 
 Route::get('/about',function(){
     return view('website.about');
@@ -49,7 +49,13 @@ Route::get('/post',function(){
 
 //admin panel
 
+
+
+
 Route::get('/test',function(){
 
 	return view('admin.dashboard.index');
+
 });
+
+Route::resource('category', 'CategoryController');
