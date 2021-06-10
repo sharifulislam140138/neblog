@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('admin/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('admin/css/adminlte.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -228,12 +229,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
+            
+                  <li class="nav-item mt-auto">
+                <a href="{{route('category.index')}}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
+                  <p>categories</p>
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -242,15 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+    
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -296,5 +291,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('admin/js/adminlte.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+  @if(Session::has('success'))
+   toastr.success("{{Session::get('success')}}");
+  @endif
+
+</script>
 </body>
 </html>

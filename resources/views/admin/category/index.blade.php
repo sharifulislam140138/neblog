@@ -41,22 +41,38 @@
                       <th>name</th>
                       <th>slug</th>
                        <th>post count</th>
-                       
-                      <th style="width: 40px">action</th>
+              
+                    <th style="width: 60px">action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($categories as $category)
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                        <td>Update software</td>
+                      <td>{{$category->id}}</td>
+                      <td>{{$category->name}}</td>
+                        <td>{{$category->slug}}</td>
+                        <td>
+                          {{$category->id}}
+                        </td>
                       <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                       
                         </div>
                       </td>
-                      <td><span class="badge bg-danger">55%</span></td>
+                      <td class="d-flex">
+                        <a href="{{route('category.edit', [$category->id])}}" class="btn btn-sm btn-primary mr-1" ><i class="fas fa-edit"></i> </a>
+
+
+                        <form action="{{route('category.destroy',[$category->id])}}" class="mr-1" method="POST">
+                          @method('DELETE')
+                          @csrf
+                          <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                          </form>
+
+                        <a href="{{route('category.show',[$category->id])}}" class="btn btn-sm btn-success mr-1" ><i class="fas fa-edit"></i> </a>
+                      </td>
                     </tr>
+
+                    @endforeach
                    
                   </tbody>
                 </table>
