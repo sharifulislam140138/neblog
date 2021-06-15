@@ -41,20 +41,20 @@
                      <form action="{{route('post.update',[$post->id])}}" method="post">
                       @csrf
                       @method('PUT')
-          <div class="card-body">
+            <div class="card-body">
                   @include('includes.errors')
                   <div class="form-group">
                     <label for="name">post title</label>
-                    <input type="name" name="title" value="{{$post->title)}}" class="form-control" id="title" placeholder="Enter title">
+                    <input type="name" name="title" value="{{$post->title}}" class="form-control" id="title" placeholder="Enter title">
                   </div>
 
                      <div class="form-group">
-                    <label for="name">post post</label>
-                   <select name="post" id="post" class="form-control" value="{{old('post')}}">
-                    <option value=""style="display: none" selected>select post</option>
+                    <label for="name">post category</label>
+                   <select name="category" id="category" class="form-control" value="{{$post->title}}">
+                    <option value=""style="display: none" selected>select category</option>
 
-                    @foreach($posts as $post)
-                     <option value="{{$post->id}}" @if($post->post_id==$post->id) selected @endif >{{$post->name}}</option>
+                    @foreach($categories as $category)
+                     <option value="{{$category->id}}" @if($post->category_id==$category->id) selected @endif>{{$category->name}}</option>
                      @endforeach
                    </select>
                   </div>
@@ -62,7 +62,7 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-8">
-                           <label for="image">image</label>
+                            <label for="image">image</label>
                   <input type="file" name="image" id="image" class="form-control.file">
 
                
@@ -76,9 +76,8 @@
                         </div>
                         
                       </div>
-
                     </div>
-                 
+                
 
                     <div class="form-group">
                     <label for="exampleInputPassword1">description</label>

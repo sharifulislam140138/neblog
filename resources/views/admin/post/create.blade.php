@@ -5,13 +5,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">edit post</h1>
+            <h1 class="m-0">create post</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('website')}}">Home</a></li>
               <li class="breadcrumb-item active"><a href="{{route('post.index')}}">post list</a></li>
-              <li class="breadcrumb-item active">edit post </li>
+              <li class="breadcrumb-item active">create post list</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,7 +26,7 @@
            
          <div class="card">
               <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">edit post - {{$post->name}}</h3>
+                <h3 class="card-title">create post list</h3>
                  <div>
                    
                    <a href="{{route('post.index')}}" class="btn btn-primary">go back post list</a>
@@ -38,47 +38,32 @@
                 <div class="row">
 
                   <div class="col-12 col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                     <form action="{{route('post.update',[$post->id])}}" method="post">
+                     <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
                       @csrf
-                      @method('PUT')
-          <div class="card-body">
+                <div class="card-body">
                   @include('includes.errors')
                   <div class="form-group">
                     <label for="name">post title</label>
-                    <input type="name" name="title" value="{{$post->title)}}" class="form-control" id="title" placeholder="Enter title">
+                    <input type="name" name="title" value="{{old('title')}}" class="form-control" id="title" placeholder="Enter title">
                   </div>
 
                      <div class="form-group">
-                    <label for="name">post post</label>
-                   <select name="post" id="post" class="form-control" value="{{old('post')}}">
-                    <option value=""style="display: none" selected>select post</option>
+                    <label for="name">post category</label>
+                   <select name="category" id="category" class="form-control" value="{{old('category')}}">
+                    <option value=""style="display: none" selected>select category</option>
 
-                    @foreach($posts as $post)
-                     <option value="{{$post->id}}" @if($post->post_id==$post->id) selected @endif >{{$post->name}}</option>
+                    @foreach($categories as $category)
+                     <option value="{{$category->id}}">{{$category->name}}</option>
                      @endforeach
                    </select>
                   </div>
 
                   <div class="form-group">
-                    <div class="row">
-                      <div class="col-8">
-                           <label for="image">image</label>
+                    <label for="image">image</label>
                   <input type="file" name="image" id="image" class="form-control.file">
 
                
                   </div>
-                        
-                      </div>
-                      <div class="col-4">
-                          <div style="max-width: 100px;max-height: 100;overflow: hidden">
-                          <img src="{{asset($post->image)}}" class="img-fluid">
-                          
-                        </div>
-                        
-                      </div>
-
-                    </div>
-                 
 
                     <div class="form-group">
                     <label for="exampleInputPassword1">description</label>
@@ -88,10 +73,9 @@
              
                 </div>
                 <!-- /.card-body -->
-                <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">update post</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </form>
 
