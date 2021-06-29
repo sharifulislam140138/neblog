@@ -38,7 +38,7 @@
                 <div class="row">
 
                   <div class="col-12 col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                     <form action="{{route('post.update',[$post->id])}}" method="post">
+                     <form action="{{route('post.update',[$post->id])}}" method="post" enctype="multipart/form-data">
                       @csrf
                       @method('PUT')
             <div class="card-body">
@@ -77,7 +77,18 @@
                         
                       </div>
                     </div>
-                
+                               @foreach($tags as $tag)
+
+                 <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" name="tags[]" type="checkbox" id="tag{{$tag->id}}" value="{{$tag->id}}" >
+                       
+                          <label for="tag{{$tag->id}}" class="custom-control-label">{{$tag->name}}</label>
+                        </div>
+                        
+                      </div>
+
+                  @endforeach
 
                     <div class="form-group">
                     <label for="exampleInputPassword1">description</label>
@@ -112,4 +123,16 @@
       </div>
     </div>
 
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="" href="{{asset('/admin/css/summernote-bs4.min.css')}}">
+@endsection
+
+@section('script')
+<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
+<script>
+                        CKEDITOR.replace( 'description' );
+                </script>
 @endsection

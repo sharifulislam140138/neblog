@@ -30,9 +30,9 @@ class PostController extends Controller
      */
     public function create()
     {
-       
+       $tags = DB::table('tags')->get();
        $categories = DB::table('categories')->get();
-        return view('admin.post.create',compact('categories'));
+        return view('admin.post.create',compact(['categories','tags']));
     }
 
     /**
@@ -43,6 +43,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $this->validate($request,[
          'title' =>'required|unique:posts,title',
          'image' =>'required|image',
@@ -63,6 +65,10 @@ class PostController extends Controller
       
 
         ]);
+        $post->tags()->attach($request->tag);
+
+
+
         if($request->has('image')){
             $image=$request->image;
             $image_new_name=time() . '.'. $image->getClientOriginalExtension();
@@ -83,7 +89,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.post.show',compact('post'));
     }
 
     /**
@@ -94,9 +100,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+         $tags= DB::table('tags')->get();
+
         $categories= DB::table('categories')->get();
 
-        return view('admin.post.edit',compact( ['post','categories']));
+        return view('admin.post.edit',compact( ['post','categories','tags']));
     }
 
     /**
@@ -108,7 +116,38 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+         $this->validate($request,[
+         'title' =>'required|unique:posts,title,$post->title',
+        
+         'description' =>'required',
+         'category' =>'required',
+         
+
+
+        ]);
+        
+
+       $post->title =$request->title;
+       $post->slug =Str::slug($request->title);
+       
+       $post->description =$request->description;
+       $post->category_id =$request->category;
+       $post->user_id =$request->category;
+      
+        $post->tags()->attach($request->tag);
+      
+        if($request->hasFile('image')){
+            $image=$request->image;
+            $image_new_name=time() . '.'. $image->getClientOriginalExtension();
+            $image->move('storage/post',$image_new_name);
+            $post->image='/storage/post/' .$image_new_name;
+            $post->save();
+            
+        }
+        
+
+        Session::flash('success','post updated successfully');
+        return redirect()->back();
     }
 
     /**
@@ -119,6 +158,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if($post){
+            if(file_exists(public_path($post->image)))
+            {
+                unlink(public_path($post->image));
+            }
+        
+        $post->delete();
+        Session::flash('post deleted successfully');
+    }
+    return redirect()->back();
     }
 }

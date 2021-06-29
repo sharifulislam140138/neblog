@@ -65,6 +65,18 @@
                
                   </div>
 
+                  @foreach($tags as $tag)
+
+                 <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" name="tags[]" type="checkbox" id="tag{{$tag->id}}" value="{{$tag->id}}">
+                          <label for="tag{{$tag->id}}" class="custom-control-label">{{$tag->name}}</label>
+                        </div>
+                        
+                      </div>
+
+                  @endforeach
+
                     <div class="form-group">
                     <label for="exampleInputPassword1">description</label>
                   <textarea name="description" id="description" rows="4" class="form-control" placeholder="enter description"></textarea>
@@ -97,4 +109,16 @@
       </div>
     </div>
 
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="" href="{{asset('/admin/css/summernote-bs4.min.css')}}">
+@endsection
+
+@section('script')
+<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
+<script>
+                        CKEDITOR.replace( 'description' );
+                </script>
 @endsection

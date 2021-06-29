@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('admin/css/adminlte.min.css')}}">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  @yield('style')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -246,19 +247,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                          <li class="nav-item mt-auto">
                 <a href="{{route('post.index')}}" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                  
+                  <i class="  nav-icon fas fa-edit"></i>
                   <p>post</p>
                 </a>
               </li>
 
+              <li class="nav-item mt-auto">
+                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+                  <p>logout</p>
+                </a>
+                
 
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
+              </li>
+
+                            <li class="nav-item mt-auto">
+                <a href="{{route('website')}}" class="btn btn-primary " target="_blank">
+                  
+                  
+                  <p>view website</p>
                 </a>
               </li>
+
+
+
+          
             </ul>
           </li>
     
@@ -310,6 +324,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('admin/js/bs-custom-file-input.min')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@yield('script')
 
 <script>
   @if(Session::has('success'))

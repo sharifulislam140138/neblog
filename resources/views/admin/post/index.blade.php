@@ -40,7 +40,9 @@
                       <th style="width: 10px">#</th>
                       <th>image</th>
                       <th>title</th>
-                       <th>category</th>
+                       <th>tags</th>
+                        <th>category</th>
+                     
                         <th>Author</th>
               
                     <th style="width: 60px">action</th>
@@ -60,6 +62,8 @@
 
                       </td>
                         <td>{{$post->title}}</td>
+                        <td>{{$post->category->name}}</td>
+
                         <td>{{$post->category->name}}</td>
                         <td>{{$post->category->name}}</td>
                      
